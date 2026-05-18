@@ -33,160 +33,248 @@
             position: fixed;
             top: -10%;
             left: -10%;
-            width: 120%;
-            height: 120%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.05) 0%, transparent 40%);
-            z-index: -2;
+            width: 50vw;
+            height: 50vh;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
         }
 
-        /* Интерактивный бэкграунд для летающих частиц */
-        #particles-container {
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -10%;
+            right: -10%;
+            width: 60vw;
+            height: 60vh;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+        }
+
+        /* ИДЕЯ 3: Интерактивный бэкграунд (Живые цифровые частицы на фоне) */
+        .bg-particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             pointer-events: none;
+            overflow: hidden;
         }
 
         .particle {
             position: absolute;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            animation: floatUp linear infinite;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 2px;
+            animation: floatParticles 20s linear infinite;
         }
 
-        @keyframes floatUp {
-            0% {
-                transform: translateY(105vh) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-5vh) translateX(50px);
-                opacity: 0;
-            }
+        @keyframes floatParticles {
+            0% { transform: translateY(105vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-5vh) translateX(50px) rotate(360deg); opacity: 0; }
         }
 
-        /* Контейнер */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Хедер / Навигация */
+        /* Навигация (Header) */
         header {
-            padding: 25px 0;
-            position: absolute;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 10;
-        }
-
-        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 25px 10%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(13, 14, 18, 0.8);
+            backdrop-filter: blur(12px); /* Эффект матового стекла */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .logo {
             font-size: 24px;
             font-weight: 800;
             letter-spacing: 1px;
-            background: linear-gradient(45deg, #6366f1, #a855f7);
+            background: linear-gradient(45deg, #6366f1, #ec4899);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        nav ul {
+        .nav-links {
             display: flex;
             list-style: none;
-            gap: 35px;
+            gap: 30px;
         }
 
-        nav ul li a {
-            color: #94a3b8;
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            font-size: 15px;
-            font-weight: 600;
-            transition: color 0.3s, transform 0.3s;
-            display: inline-block;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.3s ease;
         }
 
-        nav ul li a:hover {
+        .nav-links a:hover {
             color: #ffffff;
-            transform: translateY(-2px);
         }
 
         /* Главный экран (Hero Section) */
         .hero {
-            padding: 180px 0 100px 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            padding: 0 20px;
             position: relative;
         }
 
-        .hero-title {
-            font-size: 56px;
+        .hero h1 {
+            font-size: 64px;
             font-weight: 800;
             line-height: 1.2;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             letter-spacing: -1px;
+            animation: fadeInUp 1s ease forwards;
         }
 
-        .hero-title span {
+        .hero h1 span {
             background: linear-gradient(45deg, #6366f1, #a855f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-subtitle {
+        .hero p {
             font-size: 18px;
-            color: #94a3b8;
-            max-width: 650px;
-            margin: 0 auto 40px auto;
-            line-height: 1.6;
-            font-weight: 400;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 600px;
+            margin-bottom: 40px;
+            font-weight: 300;
+            animation: fadeInUp 1.2s ease forwards;
         }
 
-        /* Крутая неоновая кнопка */
         .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: linear-gradient(45deg, #6366f1, #a855f7);
-            color: #ffffff;
-            padding: 16px 35px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
+            display: inline-block;
+            padding: 15px 35px;
+            background: #ffffff;
+            color: #0d0e12;
             text-decoration: none;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
-            transition: all 0.4s;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 1.4s ease forwards;
         }
 
         .btn-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.5);
-            background: linear-gradient(45deg, #4f46e5, #9333ea);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.3);
+            background: linear-gradient(45deg, #6366f1, #a855f7);
+            color: #ffffff;
         }
 
-        /* Раздел проектов (Сетка) */
-        .projects {
-            padding: 80px 0;
+        /* Секция эксклюзивного проекта (Лаунчер) */
+        .launcher-section {
+            padding: 100px 10% 40px 10%;
+            background: #090a0f;
+            display: flex;
+            justify-content: center;
+        }
+
+        .launcher-block {
+            width: 100%;
+            max-width: 1100px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 24px;
+            padding: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .launcher-info {
+            max-width: 600px;
+        }
+
+        .launcher-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #818cf8;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .launcher-info h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .launcher-info p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .btn-launcher {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 30px;
+            background: linear-gradient(45deg, #6366f1, #ec4899);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
+        }
+
+        .btn-launcher:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(236, 72, 153, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .launcher-visual {
+            font-size: 120px;
+            color: rgba(255, 255, 255, 0.05);
+            background: linear-gradient(45deg, #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.8;
+            filter: drop-shadow(0 10px 20px rgba(99, 102, 241, 0.2));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Секция остальных проектов */
+        .projects-section {
+            padding: 60px 10% 60px 10%;
+            background: #090a0f;
         }
 
         .section-title {
@@ -194,40 +282,29 @@
             font-weight: 800;
             margin-bottom: 50px;
             text-align: center;
-            position: relative;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(45deg, #6366f1, #a855f7);
-            margin: 15px auto 0 auto;
-            border-radius: 2px;
-        }
-
+        /* Сетка карточек */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
         }
 
-        /* Анимированная карточка проекта */
+        /* Стильная карточка проекта */
         .project-card {
-            background-color: #15171e;
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 20px;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 40px 30px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        /* Эффект свечения при наведении на карточку */
         .project-card::before {
             content: '';
             position: absolute;
@@ -235,117 +312,131 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(99, 102, 241, 0.05), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-
-        .project-card:hover::before {
-            transform: translateX(100%);
+            background: linear-gradient(45deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
         }
 
         .project-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(99, 102, 241, 0.3);
-            box-shadow: 0 15px 35px rgba(13, 14, 18, 0.5), 0 0 30px rgba(99, 102, 241, 0.05);
+            transform: translateY(-10px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-content {
+            position: relative;
+            z-index: 1;
         }
 
         .project-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(99, 102, 241, 0.1);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
+            font-size: 35px;
             color: #6366f1;
             margin-bottom: 25px;
-            transition: all 0.3s;
+            transition: transform 0.3s ease;
         }
 
         .project-card:hover .project-icon {
-            background: linear-gradient(45deg, #6366f1, #a855f7);
-            color: #ffffff;
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
-        .project-name {
+        .project-card h3 {
             font-size: 22px;
             font-weight: 600;
             margin-bottom: 15px;
-            color: #ffffff;
         }
 
-        .project-desc {
+        .project-card p {
+            color: rgba(255, 255, 255, 0.5);
             font-size: 14px;
-            color: #94a3b8;
             line-height: 1.6;
             margin-bottom: 30px;
+            font-weight: 300;
         }
 
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #6366f1;
+        .project-link {
+            color: #ffffff;
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
-            transition: color 0.3s, gap 0.3s;
-            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+            position: relative;
+            z-index: 1;
         }
 
-        .btn-secondary:hover {
-            color: #a855f7;
-            gap: 12px;
+        .project-link i {
+            font-size: 12px;
+            transition: transform 0.3s ease;
         }
 
-        /* Секция скачивания лаунчера */
-        .download-section {
-            padding: 100px 0;
-            background: linear-gradient(180deg, transparent, #111319 100%);
+        .project-card:hover .project-link {
+            color: #6366f1;
+        }
+
+        .project-card:hover .project-link i {
+            transform: translateX(5px);
+        }
+
+        /* Секция технологий (Стек) перед футером */
+        .tech-section {
+            padding: 40px 10% 80px 10%;
+            background: #090a0f;
             text-align: center;
         }
 
-        .download-box {
-            background: linear-gradient(135deg, #15171e 0%, #1a1d26 100%);
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            border-radius: 30px;
-            padding: 60px 40px;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .download-box h2 {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-
-        .download-box p {
-            color: #94a3b8;
-            font-size: 16px;
-            margin-bottom: 35px;
-            line-height: 1.6;
-        }
-
-        /* Футер */
-        footer {
-            padding: 40px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            text-align: center;
-            color: #475569;
+        .tech-title {
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.3);
+            margin-bottom: 30px;
         }
 
-        /* Анимация появления элементов при скролле */
+        .tech-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 45px;
+            flex-wrap: wrap;
+        }
+
+        .tech-icons i {
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tech-icons i:hover {
+            color: #6366f1;
+            transform: scale(1.15);
+            filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.4));
+        }
+
+        /* Подвал сайта */
+        footer {
+            padding: 40px 10%;
+            background: #0d0e12;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Базовые стили для плавного появления при скролле */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .reveal.active {
@@ -353,125 +444,129 @@
             transform: translateY(0);
         }
 
-        /* Адаптивность для мобилок */
+        /* Анимация появления для Hero */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Адаптивность под мобильные устройства */
+        @media (max-width: 900px) {
+            .launcher-block { flex-direction: column; text-align: center; padding: 35px 20px; }
+            .launcher-visual { font-size: 80px; order: -1; }
+        }
+
         @media (max-width: 768px) {
-            .hero-title { font-size: 40px; }
-            nav ul { display: none; } /* Для простоты на мобилках скрываем */
-            .projects-grid { grid-template-columns: 1fr; }
+            header { padding: 20px 5%; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 40px; }
+            .hero p { font-size: 16px; }
+            .launcher-section, .projects-section, .tech-section { padding: 40px 5%; }
+            .tech-icons { gap: 30px; }
         }
     </style>
 </head>
 <body>
 
-    <div id="particles-container"></div>
+    <div class="bg-particles" id="particles-container"></div>
 
     <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fa-solid solid fa-bolt"></i> ClickMe Lab
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Главная</a></li>
-                    <li><a href="#projects">Проекты</a></li>
-                    <li><a href="#download">Скачать Лаунчер</a></li>
-                </ul>
-            </nav>
-        </div>
+        <div class="logo">CETR</div>
+        <ul class="nav-links">
+            <li><a href="#launcher">Лаунчер</a></li>
+            <li><a href="#projects">Проекты</a></li>
+            <li><a href="https://github.com/clickme-lab" target="_blank">GitHub</a></li>
+        </ul>
     </header>
 
-    <section class="hero" id="home">
-        <div class="container">
-            <h1 class="hero-title">Добро пожаловать в<br>лабораторию <span>ClickMe Lab</span></h1>
-            <p class="hero-subtitle">Мы создаем продвинутые утилиты, захватывающие кликеры и интерактивные игры на Python. Открой для себя новый уровень производительности и кастомного софта.</p>
-            <a href="#download" class="btn-primary">
-                <i class="fa-solid fa-download"></i> Скачать Лаунчер
-            </a>
-        </div>
+    <section class="hero">
+        <h1>Лаборатория <span>ClickMe</span></h1>
+        <p>Коллекция веб-инструментов, тестов производительности и наших будущих экосистемных приложений.</p>
+        <a href="#launcher" class="btn-primary">Узнать больше</a>
     </section>
 
-    <section class="projects id-section" id="projects">
-        <div class="container">
-            <h2 class="section-title reveal">Наши Разработки</h2>
-            
-            <div class="projects-grid">
-                
-                <div class="project-card reveal">
-                    <div>
-                        <div class="project-icon"><i class="fa-solid fa-mouse"></i></div>
-                        <h3 class="project-name">Kittik Clicker</h3>
-                        <p class="project-desc">Увлекательный и проработанный кликер с милым котиком. Накапливай очки, прокачивай уникальные улучшения и кликай на максимальной скорости!</p>
-                    </div>
-                    <a href="#download" class="btn-secondary">Скачать Лаунчер <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-
-                <div class="project-card reveal">
-                    <div>
-                        <div class="project-icon"><i class="fa-solid fa-key"></i></div>
-                        <h3 class="project-name">Shifrator V2</h3>
-                        <p class="project-desc">Продвинутая графическая утилита для быстрого кодирования и декодирования текстов с поддержкой популярных криптографических шифров.</p>
-                    </div>
-                    <a href="#download" class="btn-secondary">Скачать Лаунчер <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-
-                <div class="project-card reveal">
-                    <div>
-                        <div class="project-icon"><i class="fa-solid fa-sliders"></i></div>
-                        <h3 class="project-name">Admin Panel</h3>
-                        <p class="project-desc">Удобная и быстрая панель администрирования для удаленного и гибкого управления звуковыми потоками и громкостью на ПК.</p>
-                    </div>
-                    <a href="#download" class="btn-secondary">Скачать Лаунчер <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-
-                <div class="project-card reveal">
-                    <div>
-                        <div class="project-icon"><i class="fa-solid fa-ghost"></i></div>
-                        <h3 class="project-name">FreddyPATT</h3>
-                        <p class="project-desc">Атмосферный хоррор-проект на Python с уникальными геймплейными механиками, скримерами и собственным звуковым сопровождением.</p>
-                    </div>
-                    <a href="#download" class="btn-secondary">Скачать Лаунчер <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-
-                <div class="project-card reveal">
-                    <div>
-                        <div class="project-icon"><i class="fa-solid fa-gears"></i></div>
-                        <h3 class="project-name">GG Utility</h3>
-                        <p class="project-desc">Специализированный фоновый аудио-модуль, работающий в связке с Admin Panel для стабильной обработки аудиокоманд.</p>
-                    </div>
-                    <a href="#download" class="btn-secondary">Скачать Лаунчер <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section class="download-section" id="download">
-        <div class="container">
-            <div class="download-box reveal">
-                <h2>Получи доступ ко всем играм сразу</h2>
-                <p>Скачай официальный автономный лаунчер <strong>ClickMe Lab Hub V3</strong>. Он объединяет в себе все наши разработки, содержит встроенные иконки, не требует установки и позволяет экспортировать любую игру прямо на твой Рабочий стол в один клик!</p>
-                <a href="Launcher GamesV3.exe" download="Launcher GamesV3.exe" class="btn-primary">
-                    <i class="fa-solid fa-box-open"></i> Скачать Лаунчер (EXE)
+    <section class="launcher-section reveal" id="launcher">
+        <div class="launcher-block">
+            <div class="launcher-info">
+                <div class="launcher-badge">Релиз доступен</div>
+                <h2>ClickMe Lab Launcher</h2>
+                <p>Наш фирменный лаунчер для удобного управления проектами, быстрой компиляции, запуска кастомных утилит и интеграции со всеми инструментами ClickMe Lab прямо с твоего ПК.</p>
+                <a href="https://github.com/ClickMe-lab/NewCentr/releases/download/%23/Launcher.GamesV3.exe" class="btn-launcher" download>
+                    <i class="fa-solid fa-download"></i> Скачать Launcher.GamesV3.exe
                 </a>
             </div>
+            <div class="launcher-visual">
+                <i class="fa-solid fa-rocket"></i>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects-section reveal" id="projects">
+        <h2 class="section-title">Другие разработки</h2>
+        
+        <div class="projects-grid">
+            
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-icon">
+                        <i class="fa-solid fa-mouse"></i>
+                    </div>
+                    <h3>CPS Test</h3>
+                    <p>Продвинутый инструмент для измерения скорости кликов в секунду. Проверь свой Drag Click, Jitter Click или обычный клик на точность.</p>
+                </div>
+                <a href="https://clickme-lab.github.io/cps_test/" class="project-link" target="_blank">Открыть <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-icon">
+                        <i class="fa-solid fa-cube"></i>
+                    </div>
+                    <h3>Python Apps</h3>
+                    <p>Сборка десктопных приложений и графических интерфейсов. Попробуй наши автономные .exe утилиты, управляемые через лаунчер.</p>
+                </div>
+                <a href="#launcher" class="project-link">Скачать в лаунчере <i class="fa-solid fa-download"></i></a>
+            </div>
+
+            <div class="project-card">
+                <div class="project-content">
+                    <div class="project-icon">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <h3>Games Laboratory</h3>
+                    <p>Эксперименты с игровой логикой, тесты механик и мини-игры, разработанные нашей командой.</p>
+                </div>
+                <a href="#" class="project-link">В разработке <i class="fa-solid fa-clock"></i></a>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="tech-section reveal">
+        <div class="tech-title">Технологии лаборатории</div>
+        <div class="tech-icons">
+            <i class="fa-brands fa-python" title="Python"></i>
+            <i class="fa-brands fa-html5" title="HTML5"></i>
+            <i class="fa-brands fa-css3-alt" title="CSS3"></i>
+            <i class="fa-brands fa-js" title="JavaScript"></i>
+            <i class="fa-brands fa-github" title="GitHub"></i>
+            <i class="fa-solid fa-terminal" title="Pygame & Скрипты"></i>
         </div>
     </section>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2026 ClickMe Lab. Разработано Lomt1k_exo Studio. Все права защищены.</p>
-        </div>
+        <p>&copy; 2026 ClickMe Lab. Все права защищены.</p>
+        <p>Designed for Cetr</p>
     </footer>
 
     <script>
-        // Функция анимации появления элементов при прокрутке страницы
+        // Функция для отслеживания скролла (Появление блоков)
         function revealElements() {
             const reveals = document.querySelectorAll('.reveal');
-            
             for (let i = 0; i < reveals.length; i++) {
                 const windowHeight = window.innerHeight;
                 const elementTop = reveals[i].getBoundingClientRect().top;
-                const elementVisible = 100; // Элемент появляется, когда до него осталось 100px
+                const elementVisible = 100;
 
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add('active');
@@ -479,26 +574,26 @@
             }
         }
         window.addEventListener('scroll', revealElements);
-        window.addEventListener('load', revealElements); // Проверка при первой загрузке
+        window.addEventListener('load', revealElements);
 
         // Генератор частиц для живого бэкграунда
         const container = document.getElementById('particles-container');
-        const particleCount = 20; // Оптимальное количество частиц, чтобы не лагало
+        const particleCount = 20;
 
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.classList.add('particle');
             
-            // Рандомный размер, позиция и задержка анимации
             const size = Math.random() * 4 + 2 + 'px';
             particle.style.width = size;
             particle.style.height = size;
             particle.style.left = Math.random() * 100 + 'vw';
             particle.style.animationDelay = Math.random() * 20 + 's';
-            particle.style.animationDuration = Math.random() * 10 + 15 + 's'; // От 15 до 25 сек
+            particle.style.animationDuration = Math.random() * 10 + 15 + 's';
             
             container.appendChild(particle);
         }
     </script>
+
 </body>
 </html>
